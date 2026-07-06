@@ -1,0 +1,35 @@
+{
+  "upload_id": "test_001",
+  "company_id": "company_123",
+  "rows": [
+    {
+      "invoice_no": "INV-2025-001",
+      "vendor": "ABC Enterprises",
+      "date": "2025-10-28",
+      "base_amount": 49500,
+      "gst_rate": 18,
+      "gst_amount": 8910,
+      "total_amount": 58410,
+      "gstin": "27AAAAA0000A1Z5"
+    },
+    {
+      "invoice_no": "INV-2025-002",
+      "vendor": "XYZ Corp",
+      "date": "2025-10-27",
+      "base_amount": 100000,
+      "gst_rate": 12,
+      "gst_amount": 12000,
+      "total_amount": 112000
+    },
+    {
+      "invoice_no": "INV-2025-003",
+      "vendor": "Suspicious Vendor",
+      "date": "2025-10-26",
+      "base_amount": 50000,
+      "gst_rate": 15,
+      "gst_amount": 7500,
+      "total_amount": 57500,
+      "gstin": "INVALID_GSTIN"
+    }
+  ]
+}

@@ -1,34 +1,68 @@
-# Node modules
-node_modules/
+# ==========================================
+# Root Gitignore for AegisAI
+# ==========================================
 
-# Environment variables
+# 1. Environment Variables & Secrets
 .env
-.env.local
+.env.*
+!.env.example
+!.env.sample
 
-# Build outputs
+# 2. Virtual Environments & Dependencies
+venv/
+.venv/
+env/
+ENV/
+node_modules/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 3. Cache & Compiled Files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
 dist/
 build/
+.next/
+.out/
+*.tfstate
+*.tfstate.*
+.terraform/
 
-# Logs
-*.log
-npm-debug.log*
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-
-# Python
-__pycache__/
-*.pyc
-*.pyo
+# 4. Large Model Weights & Checkpoints (Exceeds GitHub 100MB limit & bloats repo)
+*.pth
+*.pt
 *.pkl
+*.joblib
 *.h5
-venv/
-env/
+*.keras
+*.onnx
+*.safetensors
+*.bin
+*.model
+models/
 
-# Docker
-*.log
+# 5. Datasets & Local Storage
+data/
+blockchain_data/
+synthetic_docs/
+*.arff
+*.parquet
+*.db
+*.sqlite3
+*.sqlite
+
+# 6. Backups & Temp Files
+ai-mentor-OLD-BACKUP/
+*.tmp
+*.bak
+*.swp
+*~
+.DS_Store
+*.zip
+*.tar.gz

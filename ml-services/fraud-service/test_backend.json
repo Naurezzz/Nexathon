@@ -1,0 +1,14 @@
+{
+  "companyId": "test_company",
+  "invoices": [
+    {
+      "invoice_no": "INV-2025-001",
+      "vendor": "Test Vendor",
+      "date": "2025-10-28",
+      "base_amount": 50000,
+      "gst_rate": 15,
+      "gst_amount": 7500,
+      "total_amount": 57500
+    }
+  ]
+}

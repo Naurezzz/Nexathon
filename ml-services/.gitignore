@@ -1,0 +1,58 @@
+# ==========================================
+# ML Services Gitignore
+# ==========================================
+
+# 1. Virtual Environments & Dependencies
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# 2. Python Cache & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+*.log.*
+
+# 3. Large Model Weights & Checkpoints (Exceeds GitHub 100MB limit & bloats repo)
+# Note: In industry, recruiters and engineers look at code, architecture, and training scripts, not raw weight files!
+*.pth
+*.pt
+*.pkl
+*.joblib
+*.h5
+*.keras
+*.onnx
+*.safetensors
+*.bin
+*.model
+models/
+
+# 4. Large Datasets & Local Storage
+# Keep small test JSONs/CSVs directly in service roots, but ignore large data/ folders & raw formats
+data/
+blockchain_data/
+synthetic_docs/
+*.arff
+*.parquet
+*.db
+*.sqlite3
+*.sqlite
+
+# 5. Backups, Deprecated Folders & Temp Files
+ai-mentor-OLD-BACKUP/
+*.tmp
+*.bak
+*.swp
+*~
+.DS_Store
