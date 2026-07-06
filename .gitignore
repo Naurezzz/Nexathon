@@ -66,3 +66,8 @@ ai-mentor-OLD-BACKUP/
 .DS_Store
 *.zip
 *.tar.gz
+
+# 7. Personal & Interview Notes
+*INTERVIEW_PREP*.md
+AEGISAI_INTERVIEW_PREP.md
+
