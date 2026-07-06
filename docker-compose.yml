@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongo:
+    image: mongo:7.0
+    container_name: aegis-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - aegis-network
+    environment:
+      MONGO_INITDB_DATABASE: aegis
+    restart: unless-stopped
+
+  # ML Fraud Detection Service
+  fraud-service:
+    build:
+      context: ./ml-services/fraud-service
+      dockerfile: Dockerfile
+    container_name: aegis-fraud-service
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./ml-services/fraud-service:/app
+    networks:
+      - aegis-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Backend API Gateway
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: aegis-backend
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      - PORT=4000
+      - MONGO_URI=mongodb://mongo:27017/aegis
+      - FRAUD_SERVICE_URL=http://fraud-service:8001
+      - NODE_ENV=development
+      - FRONTEND_URL=http://localhost:5173
+    depends_on:
+      - mongo
+      - fraud-service
+    networks:
+      - aegis-network
+    restart: unless-stopped
+
+  # Frontend React App
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: aegis-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_BASE=http://localhost:4000
+    depends_on:
+      - backend
+    networks:
+      - aegis-network
+    restart: unless-stopped
+
+# Named volumes for persistent data
+volumes:
+  mongo-data:
+    driver: local
+
+# Network for all services to communicate
+networks:
+  aegis-network:
+    driver: bridge
